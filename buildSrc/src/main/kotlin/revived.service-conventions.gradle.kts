@@ -18,10 +18,7 @@ repositories {
 
 dependencies {
     "implementation"(project(":shared"))
-    "implementation"("redis.clients:jedis:5.2.0")
     "implementation"("com.google.code.gson:gson:2.12.1")
-    "implementation"("org.slf4j:slf4j-api:2.0.16")
-    "runtimeOnly"("ch.qos.logback:logback-classic:1.5.16")
     "testImplementation"("org.junit.jupiter:junit-jupiter:5.11.4")
 }
 

@@ -12,6 +12,10 @@ junit = "5.11.4"
 mockito = "5.15.2"
 compositio = "1.0.1"
 concordia = "1.0.1"
+protobuf = "4.29.3"
+grpc = "1.70.0"
+protobuf-plugin = "0.9.4"
+javax-annotation = "1.3.2"
 
 [libraries]
 paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper" }
@@ -32,6 +36,13 @@ configurate-yaml = { module = "org.spongepowered:configurate-yaml", version.ref 
 compositio = { module = "club.revived.commons:compositio", version.ref = "compositio" }
 concordia = { module = "club.revived.commons:concordia", version.ref = "concordia" }
 
+protobuf-java = { module = "com.google.protobuf:protobuf-java", version.ref = "protobuf" }
+protobuf-java-util = { module = "com.google.protobuf:protobuf-java-util", version.ref = "protobuf" }
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc" }
+grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
+grpc-netty = { module = "io.grpc:grpc-netty", version.ref = "grpc" }
+javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javax-annotation" }
+
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
@@ -40,7 +51,9 @@ mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.
 [bundles]
 database = ["hikaricp", "exposed-core", "exposed-dao", "exposed-jdbc", "exposed-java-time"]
 adventure = ["adventure-api", "adventure-text-minimessage"]
+protobuf = ["protobuf-java", "protobuf-java-util", "grpc-stub", "grpc-protobuf", "grpc-netty", "javax-annotation-api"]
 testing = ["junit-jupiter", "junit-jupiter-api", "mockito-core", "mockito-junit-jupiter"]
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }

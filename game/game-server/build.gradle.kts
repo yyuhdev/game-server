@@ -1,6 +1,7 @@
 plugins {
     id("revived.paper-conventions")
     id("com.gradleup.shadow")
+    alias(libs.plugins.protobuf)
 }
 
 dependencies {
@@ -15,13 +16,40 @@ dependencies {
     compileOnly(libs.paper.api)
     
     implementation(libs.bundles.database)
-    implementation(libs.jedis)
     implementation(libs.guava)
     implementation(libs.gson)
     implementation(libs.compositio)
     implementation(libs.concordia)
+    implementation(libs.bundles.protobuf)
     
     testImplementation(libs.bundles.testing)
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:4.29.3"
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.70.0"
+        }
+    }
+    generateProtoTasks {
+        all().forEach { task ->
+            task.plugins {
+                create("grpc")
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs("build/generated/source/proto/main/grpc")
+            srcDirs("build/generated/source/proto/main/java")
+        }
+    }
 }
 
 tasks.shadowJar {
@@ -32,6 +60,8 @@ tasks.shadowJar {
     relocate("com.google.common", "club.revived.libs.guava")
     relocate("com.zaxxer.hikari", "club.revived.libs.hikari")
     relocate("org.jetbrains.exposed", "club.revived.libs.exposed")
+    relocate("io.grpc", "club.revived.libs.grpc")
+    relocate("com.google.protobuf", "club.revived.libs.protobuf")
     
     mergeServiceFiles()
 }
