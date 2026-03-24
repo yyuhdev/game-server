@@ -3,8 +3,8 @@ package club.revived.game.api.gamemode.handler;
 import java.util.List;
 import java.util.UUID;
 
-import club.revived.commons.proto.GameState;
-import club.revived.commons.proto.Team;
+import club.revived.proto.v1.minigames.GameState;
+import club.revived.proto.v1.minigames.Team;
 
 public abstract class AbstractGameHandler {
 

@@ -5,4 +5,5 @@ plugins {
 dependencies {
     api(project(":shared"))
     compileOnly(libs.paper.api)
+    api(libs.bundles.protobuf)
 }

@@ -16,13 +16,6 @@ repositories {
     maven("https://mvn.revived.club/releases")
 }
 
-configurations.all {
-    resolutionStrategy {
-        force("com.google.protobuf:protobuf-java:4.34.1")
-        force("com.google.protobuf:protobuf-java-util:4.34.1")
-    }
-}
-
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }

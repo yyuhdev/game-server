@@ -17,8 +17,6 @@ dependencies {
     implementation(libs.bundles.database)
     implementation(libs.guava)
     implementation(libs.gson)
-    implementation(libs.compositio)
-    implementation(libs.concordia)
     implementation(libs.bundles.protobuf)
     
     testImplementation(libs.bundles.testing)
