@@ -32,7 +32,6 @@ tasks.shadowJar {
     relocate("com.google.common", "club.revived.libs.guava")
     relocate("com.zaxxer.hikari", "club.revived.libs.hikari")
     relocate("org.jetbrains.exposed", "club.revived.libs.exposed")
-    relocate("io.grpc", "club.revived.libs.grpc")
     relocate("com.google.protobuf", "club.revived.libs.protobuf")
     
     mergeServiceFiles()
