@@ -1,7 +1,6 @@
 plugins {
     id("revived.paper-conventions")
     id("com.gradleup.shadow")
-    alias(libs.plugins.protobuf)
 }
 
 dependencies {
@@ -23,33 +22,6 @@ dependencies {
     implementation(libs.bundles.protobuf)
     
     testImplementation(libs.bundles.testing)
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:4.29.3"
-    }
-    plugins {
-        create("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.70.0"
-        }
-    }
-    generateProtoTasks {
-        all().forEach { task ->
-            task.plugins {
-                create("grpc")
-            }
-        }
-    }
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs("build/generated/source/proto/main/grpc")
-            srcDirs("build/generated/source/proto/main/java")
-        }
-    }
 }
 
 tasks.shadowJar {
