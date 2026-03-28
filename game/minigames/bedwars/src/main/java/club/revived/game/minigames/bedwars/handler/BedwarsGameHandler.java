@@ -18,4 +18,12 @@ public final class BedwarsGameHandler extends AbstractGameHandler {
   public void startGame() {
 
   }
+
+  @Override
+  public Runnable matchTimeout() {
+    return () -> {
+      for (final var player : super.players()) {
+      }
+    };
+  }
 }

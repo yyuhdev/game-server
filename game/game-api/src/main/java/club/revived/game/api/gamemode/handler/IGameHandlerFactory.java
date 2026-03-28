@@ -7,6 +7,5 @@ import club.revived.proto.v1.minigames.GameMeta;
 public interface IGameHandlerFactory {
 
   @NotNull
-  AbstractGameHandler createHandler(
-      final @NotNull GameMeta meta);
+  AbstractGameHandler createHandler(final @NotNull GameMeta meta);
 }

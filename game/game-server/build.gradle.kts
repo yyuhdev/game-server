@@ -10,7 +10,6 @@ dependencies {
     implementation(project(":game:minigames:bedwars"))
     implementation(project(":game:minigames:skywars"))
     implementation(project(":game:minigames:duels"))
-    implementation(project(":game:minigames:spleef"))
     
     compileOnly(libs.paper.api)
     
@@ -27,6 +26,7 @@ tasks.shadowJar {
     archiveBaseName.set("game-server")
     
     relocate("com.google.gson", "club.revived.libs.gson")
+    relocate("club.revived.celery", "club.revived.libs.celery")
     relocate("com.google.common", "club.revived.libs.guava")
     relocate("com.zaxxer.hikari", "club.revived.libs.hikari")
     relocate("org.jetbrains.exposed", "club.revived.libs.exposed")

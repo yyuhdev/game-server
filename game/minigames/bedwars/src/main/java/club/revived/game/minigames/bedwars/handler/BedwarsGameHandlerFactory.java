@@ -9,8 +9,7 @@ import club.revived.proto.v1.minigames.GameMeta;
 public final class BedwarsGameHandlerFactory implements IGameHandlerFactory {
 
   @Override
-  public @NotNull AbstractGameHandler createHandler(
-      final @NotNull GameMeta meta) {
+  public @NotNull AbstractGameHandler createHandler(final @NotNull GameMeta meta) {
     return new BedwarsGameHandler();
   }
 }

@@ -1,0 +1,90 @@
+x-credentials: &creds
+  MONGO_USER: admin
+  MONGO_PASSWORD: password
+  MONGO_DATABASE: revived
+  MONGO_PORT: 27017
+
+  REDIS_PASSWORD: ""
+  REDIS_PORT: 6379
+
+  NATS_PASSWORD: ""
+  NATS_PORT: 4222
+
+  INFLUX_ORG: my-org
+  INFLUX_TOKEN: my-token
+  INFLUX_BUCKET: my-bucket
+  INFLUX_PORT: 8086
+
+services:
+  queue:
+    build:
+      context: .
+      dockerfile: services/queue/Dockerfile
+    depends_on:
+      - mongodb
+      - redis
+      - nats
+      - influxdb
+    environment:
+      <<: *creds
+      MONGO_HOST: mongodb
+      REDIS_HOST: redis
+      NATS_HOST: nats
+      INFLUX_HOST: http://influxdb:8086
+    networks:
+      - revived-net
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      <<: *creds
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: revived
+      MONGO_HOST: mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - revived-net
+
+  redis:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly
+    environment:
+      <<: *creds
+      REDIS_HOST: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - revived-net
+
+  nats:
+    image: nats:latest
+    environment:
+      <<: *creds
+      NATS_HOST: nats
+    ports:
+      - "4222:4222"
+    networks:
+      - revived-net
+
+  influxdb:
+    image: influxdb:latest
+    environment:
+      <<: *creds
+
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: admin
+      DOCKER_INFLUXDB_INIT_PASSWORD: password
+      DOCKER_INFLUXDB_INIT_ORG: my-org
+      DOCKER_INFLUXDB_INIT_BUCKET: my-bucket
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: my-token
+
+      INFLUX_HOST: influxdb
+    ports:
+      - "8086:8086"
+    networks:
+      - revived-net
+
+networks:
+  revived-net:
+    driver: bridge

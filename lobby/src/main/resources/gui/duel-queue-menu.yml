@@ -1,0 +1,101 @@
+id: duel-queue-menu
+title-key: gui.duel-queue.title
+rows: 4
+prevent-close: false
+
+items:
+  border:
+    material: GRAY_STAINED_GLASS_PANE
+    name: " "
+
+  queue-status:
+    material: CLOCK
+    name-key: gui.duel-queue.status.name
+    lore-key: gui.duel-queue.status.lore
+    placeholders:
+      queue_time: "0:00"
+      players_in_queue: "0"
+
+  ranked-duel:
+    material: DIAMOND_SWORD
+    name-key: gui.duel-queue.ranked.name
+    lore-key: gui.duel-queue.ranked.lore
+    glowing: true
+    flags:
+      - HIDE_ATTRIBUTES
+    placeholders:
+      elo: "1000"
+
+  unranked-duel:
+    material: IRON_SWORD
+    name-key: gui.duel-queue.unranked.name
+    lore-key: gui.duel-queue.unranked.lore
+    flags:
+      - HIDE_ATTRIBUTES
+
+  kit-selector:
+    material: CHEST
+    name-key: gui.duel-queue.kit-selector.name
+    lore-key: gui.duel-queue.kit-selector.lore
+    placeholders:
+      selected_kit: "None"
+
+  leave-queue:
+    material: RED_DYE
+    name-key: gui.duel-queue.leave.name
+    lore-key: gui.duel-queue.leave.lore
+
+  back:
+    material: ARROW
+    name-key: gui.duel-queue.back.name
+    lore-key: gui.duel-queue.back.lore
+
+layout:
+  - item: border
+    pattern: |
+      XXXXXXXXX
+      X.......X
+      X.......X
+      XXXXXXXXX
+
+  - item: queue-status
+    slot: 4
+    update-interval: 20
+    states:
+      - id: active
+        condition: in_queue
+        item:
+          material: CLOCK
+          name: "<green>Queue Active"
+          lore:
+            - "<gray>Time in queue: <yellow>{queue_time}"
+            - "<gray>Players waiting: <yellow>{players_in_queue}"
+          glowing: true
+
+  - item: ranked-duel
+    slot: 11
+    action: queue:ranked
+
+  - item: unranked-duel
+    slot: 13
+    action: queue:unranked
+
+  - item: kit-selector
+    slot: 15
+    action: open:kit-selector-menu
+
+  - item: leave-queue
+    slot: 29
+    action: leave-queue
+    states:
+      - id: disabled
+        condition: not_in_queue
+        item:
+          material: GRAY_DYE
+          name: "<gray>Leave Queue"
+          lore:
+            - "<dark_gray>You are not in a queue"
+
+  - item: back
+    slot: 31
+    action: open:queue-menu

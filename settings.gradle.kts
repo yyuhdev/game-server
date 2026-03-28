@@ -19,6 +19,7 @@ dependencyResolutionManagement {
 }
 
 include("shared")
+include("lobby")
 
 include("game:game-api")
 include("game:game-server")
@@ -26,4 +27,5 @@ include("game:game-server")
 include("game:minigames:bedwars")
 include("game:minigames:skywars")
 include("game:minigames:duels")
-include("game:minigames:spleef")
+
+include("services:queue")

@@ -25,13 +25,16 @@ tasks.register<Sync>("collectPlugins") {
 tasks.register<Sync>("collectServices") {
     group = "distribution"
     description = "Collects all microservice JARs into output/services"
-    
+
     into(outputDir.dir("services"))
-    
-    subprojects.filter { it.path.startsWith(":services:") && !it.name.startsWith(".") }.forEach { serviceProject ->
-        val shadowTask = serviceProject.tasks.named("shadowJar")
-        from(shadowTask) { rename { "${serviceProject.name}.jar" } }
-    }
+
+    subprojects
+        .filter { it.path.startsWith(":services:") && !it.name.startsWith(".") }
+        .forEach { serviceProject ->
+            val jarName = "${serviceProject.name}.jar"
+            val shadowTask = serviceProject.tasks.named("shadowJar")
+            from(shadowTask) { rename { jarName } }
+        }
 }
 
 tasks.register("collectAll") {
@@ -43,4 +46,12 @@ tasks.register("collectAll") {
 
 tasks.build {
     dependsOn("collectAll")
+}
+
+tasks.register<Exec>("dev") {
+    dependsOn(
+        "build"
+    )
+
+    commandLine("docker", "compose", "up", "-d", "--build")
 }

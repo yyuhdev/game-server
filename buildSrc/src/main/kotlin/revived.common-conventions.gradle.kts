@@ -16,6 +16,7 @@ repositories {
     maven("https://mvn.revived.club/releases")
 }
 
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
@@ -32,7 +33,6 @@ sourceSets {
     }
 }
 
-// Create or reference the root-level generateProto task
 val generateProtoTask = rootProject.tasks.findByName("generateProto") ?: rootProject.tasks.register<Exec>("generateProto") {
     workingDir(rootProject.projectDir.resolve("proto"))
     commandLine("buf", "generate", "proto")

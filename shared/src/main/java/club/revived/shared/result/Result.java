@@ -190,4 +190,20 @@ public sealed interface Result<T, E> permits Result.Ok, Result.Err {
       return Optional.of(error);
     }
   }
+
+  @FunctionalInterface
+  interface ThrowingSupplier<T, X extends Throwable> {
+    T get() throws X;
+  }
+
+  static <T, X extends Throwable> @NotNull Result<T, X> of(
+      final @NotNull ThrowingSupplier<T, X> supplier) {
+    try {
+      return ok(supplier.get());
+    } catch (Throwable e) {
+      @SuppressWarnings("unchecked")
+      X error = (X) e;
+      return err(error);
+    }
+  }
 }

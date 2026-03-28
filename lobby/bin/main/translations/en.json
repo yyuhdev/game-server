@@ -1,0 +1,43 @@
+{
+  "gui": {
+    "error": "<red>An error occured, please try again later!",
+    "duel-queue": {
+      "title": "<dark_gray>Duel Queue</dark_gray>",
+      "status": {
+        "name": "<gold>Queue Status</gold>",
+        "lore": [
+          "<gray>Time in queue: <white>{queue_time}</white></gray>",
+          "<gray>Players in queue: <white>{players_in_queue}</white></gray>"
+        ]
+      },
+      "unranked": {
+        "name": "<aqua>Unranked Duel</aqua>",
+        "lore": [
+          "<gray>Practice without ELO risk</gray>",
+          "",
+          "<green>Click to join queue!</green>"
+        ]
+      },
+      "kit-selector": {
+        "name": "<yellow>Select Kit</yellow>",
+        "lore": [
+          "<gray>Current kit: <white>{selected_kit}</white></gray>",
+          "",
+          "<green>Click to select a kit!</green>"
+        ]
+      },
+      "leave": {
+        "name": "<red>Leave Queue</red>",
+        "lore": [
+          "<gray>Click to leave the queue</gray>"
+        ]
+      },
+      "back": {
+        "name": "<gray>Back</gray>",
+        "lore": [
+          "<gray>Return to previous menu</gray>"
+        ]
+      }
+    }
+  }
+}

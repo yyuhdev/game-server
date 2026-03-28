@@ -1,0 +1,9 @@
+name: LobbyServer
+version: 1.0.0
+main: club.revived.lobby.LobbyServer
+api-version: 1.21
+author: GoonSkibidiToilet
+description: A simple Minecraft plugin
+
+commands:
+  test:

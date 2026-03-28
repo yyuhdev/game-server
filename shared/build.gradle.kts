@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    compileOnly(libs.paper.api)
+    
     api(libs.gson)
     api(libs.guava)
     api(libs.bundles.adventure)

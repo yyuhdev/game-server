@@ -4,7 +4,10 @@ plugins {
 
 repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://mvn.revived.club/releases")
 }
+
+
 
 tasks.processResources {
     val props = mapOf(
